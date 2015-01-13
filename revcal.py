@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import date, time, datetime
+from unicodedata import normalize
 __all__ = ['MONTH_NAMES', 'WEEKDAY_NAMES', 'Calendar']
 
 # global variables for constant values
@@ -32,11 +33,11 @@ MONTH_NAMES = [
 WEEKDAY_NAMES = [
 	u'',
 	u'Primidi',
-	u'Duodi',
-	u'Tridi',
-	u'Quartidi',
-	u'Quintidi',
-	u'Sextidi',
+	u'Dromidi',
+	u'Isidi',
+	u'Novidi',
+	u'Jocidi',
+	u'Contidi',
 	u'Adelphidi',
 	u'Vocidi',
 	u'Milidi',
@@ -138,3 +139,6 @@ class Calendar:
 		month = MONTH_NAMES[self.month]
 		fields = (weekday, self.day, month, self.year, self.hour, self.minute, self.second)
 		return "%s, %d %s, AR %d, %02d:%02d:%02d" % fields
+		
+	def __str__(self):
+		return normalize('NFKD', self.__unicode__()).encode('ascii', 'ignore')
